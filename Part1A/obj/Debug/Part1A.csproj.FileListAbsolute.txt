@@ -1,0 +1,17 @@
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\App.g.cs
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A_MarkupCompile.cache
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A_MarkupCompile.lref
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\bin\Debug\Part1A.exe.config
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\bin\Debug\Part1A.exe
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\bin\Debug\Part1A.pdb
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A.g.resources
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A.Properties.Resources.resources
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A.csproj.GenerateResource.cache
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A.csproj.CoreCompileInputs.cache
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A.exe
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Part1A.pdb
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Views\EmployeeListView.g.cs
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Views\MainWindowView.g.cs
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Views\EmployeeListView.baml
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\Views\MainWindowView.baml
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1A\obj\Debug\GeneratedInternalTypeHelper.g.cs
