@@ -5,17 +5,13 @@ using System.Linq;
 
 namespace Part1A.ViewModels
 {
-    class EmployeeViewModel : INotifyPropertyChanged
+    class EmployeeViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public IReadOnlyCollection<EmployeeModel> Employees { get; private set; }
 
         public EmployeeViewModel(params EmployeeModel[] employees)
         {
             Employees = employees.ToList().AsReadOnly();
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Employees"));
         }
     }
 }
