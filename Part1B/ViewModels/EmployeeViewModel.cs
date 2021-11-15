@@ -38,24 +38,24 @@ namespace Part1B.ViewModels
         {
             AddCommand = new RelayCommand(OnAddClicked, CanAddBeClicked);
 
-            EmployeeModelFileService.Instance.OnFileChanged += OnFileChanged;
+            ApplicationStateService.Instance.OnFileChanged += OnFileChanged;
 
-            OnFileChanged(EmployeeModelFileService.Instance.CurrentFile);
+            OnFileChanged(ApplicationStateService.Instance.CurrentFile);
         }
 
         ~EmployeeViewModel()
         {
-            EmployeeModelFileService.Instance.OnFileChanged -= OnFileChanged;
+            ApplicationStateService.Instance.OnFileChanged -= OnFileChanged;
         }
 
         private void OnFileChanged(IReadOnlyCollection<EmployeeModel> employees)
         {
-            Employees = EmployeeModelFileService.Instance.CurrentFile.ToList().AsReadOnly();
+            Employees = ApplicationStateService.Instance.CurrentFile;
         }
 
         private void OnAddClicked(object parameter)
         {
-            EmployeeModelFileService.Instance.AddNewEmployee(new EmployeeModel(CurrentName, CurrentTitle, CurrentDepartment));
+            ApplicationStateService.Instance.AddNewEmployee(new EmployeeModel(CurrentName, CurrentTitle, CurrentDepartment));
         }
 
         private bool CanAddBeClicked(object parameter)

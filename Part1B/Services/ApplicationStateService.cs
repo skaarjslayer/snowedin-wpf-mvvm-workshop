@@ -5,20 +5,20 @@ using System.Linq;
 
 namespace Part1B.Services
 {
-    class EmployeeModelFileService : SingletonBase<EmployeeModelFileService>
+    class ApplicationStateService : SingletonBase<ApplicationStateService>
     {
-        public static List<EmployeeModel> EmptyFile = new List<EmployeeModel> { };
+        public static readonly List<EmployeeModel> EmptyFile = new List<EmployeeModel> { };
 
         public event Action<IReadOnlyCollection<EmployeeModel>> OnFileChanged = null;
 
         private List<EmployeeModel> currentFile = EmptyFile;
         public IReadOnlyCollection<EmployeeModel> CurrentFile { get { return currentFile.AsReadOnly(); } }
 
-        public void RequestCreateNewFile(params EmployeeModel[] employeeModel)
+        public void RequestCreateNewFile()
         {
-            currentFile = employeeModel.ToList();
+            currentFile = EmptyFile;
 
-            OnFileChanged?.Invoke(employeeModel);
+            OnFileChanged?.Invoke(currentFile);
         }
 
         public void RequestLoadFile(string filepath)

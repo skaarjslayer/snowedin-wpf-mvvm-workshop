@@ -3,16 +3,16 @@ using Part1B.Commands;
 using Part1B.Services;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Part1B.ViewModels
 {
     class MainMenuViewModel
     {
-        //public ExitCommand ExitCommand { get; private set; } = new ExitCommand();
-        public RelayCommand NewCommand { get; private set; }
-        public RelayCommand SaveCommand { get; private set; }
-        public RelayCommand LoadCommand { get; private set; }
-        public RelayCommand ExitCommand { get; private set; }
+        public ICommand NewCommand { get; private set; }
+        public ICommand SaveCommand { get; private set; }
+        public ICommand LoadCommand { get; private set; }
+        public ICommand ExitCommand { get; private set; }
 
         public MainMenuViewModel()
         {
@@ -24,7 +24,7 @@ namespace Part1B.ViewModels
 
         private void OnNewClicked(object parameter)
         {
-            EmployeeModelFileService.Instance.RequestCreateNewFile(EmployeeModelFileService.EmptyFile.ToArray());
+            ApplicationStateService.Instance.RequestCreateNewFile();
         }
 
         private void OnSaveClicked(object parameter)
@@ -33,7 +33,7 @@ namespace Part1B.ViewModels
 
             if (saveFileDialog.ShowDialog().Value)
             {
-                EmployeeModelFileService.Instance.RequestSaveFile(saveFileDialog.FileName);
+                ApplicationStateService.Instance.RequestSaveFile(saveFileDialog.FileName);
             }
             else
             {
@@ -47,7 +47,7 @@ namespace Part1B.ViewModels
 
             if (openFileDialog.ShowDialog().Value)
             {
-                EmployeeModelFileService.Instance.RequestLoadFile(openFileDialog.FileName);
+                ApplicationStateService.Instance.RequestLoadFile(openFileDialog.FileName);
             }
             else
             {

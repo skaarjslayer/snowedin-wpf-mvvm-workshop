@@ -65,7 +65,7 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
-    <Compile Include="Services\EmployeeModelFileService.cs" />
+    <Compile Include="Services\ApplicationStateService.cs" />
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\SingletonBase.cs" />
     <Compile Include="Services\SerializationService.cs" />
