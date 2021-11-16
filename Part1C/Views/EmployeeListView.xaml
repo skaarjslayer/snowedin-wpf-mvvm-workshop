@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Part1C.Views.EmployeeListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Part1C.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding Path=EmployeeViewModel, Source={StaticResource ViewModelLocator}}">
+    <Grid>
+        <StackPanel>
+            <ListView Margin="10" Name="EmployeesList" ItemsSource="{Binding Path=Employees}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="Name: " />
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" />
+                            <TextBlock Text=", " />
+                            <TextBlock Text="Department: " />
+                            <TextBlock Text="{Binding Department}" FontWeight="Bold" />
+                            <TextBlock Text=", " />
+                            <TextBlock Text="Title: " />
+                            <TextBlock Text="{Binding Title}" FontWeight="Bold" />
+                        </WrapPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,10,10">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Margin" Value="5,0,10,0"/>
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="20,0,0,0"/>
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock>Name:</TextBlock>
+                <TextBox Text="{Binding CurrentName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock>Department:</TextBlock>
+                <TextBox Text="{Binding CurrentDepartment, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock>Title:</TextBlock>
+                <TextBox Text="{Binding CurrentTitle, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Command="{Binding AddCommand}">Add</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

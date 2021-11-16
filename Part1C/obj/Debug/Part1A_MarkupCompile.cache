@@ -1,20 +1,20 @@
-﻿Part1B
+﻿Part1A
 
 
 winexe
 C#
 .cs
 C:\git\snowedin-wpf-mvvm-workshop\Part1B\obj\Debug\
-Part1B
+Part1A
 none
 false
 DEBUG;TRACE
 C:\git\snowedin-wpf-mvvm-workshop\Part1B\App.xaml
-3-741246001
+2963175313
 
-17-1904238282
-14-789155317
-Views\EmployeeListView.xaml;Views\MainMenuView.xaml;Views\MainWindowView.xaml;
+81733086758
+13-1505183044
+Views\EmployeeListView.xaml;Views\MainWindowView.xaml;
 
-True
+False
 
