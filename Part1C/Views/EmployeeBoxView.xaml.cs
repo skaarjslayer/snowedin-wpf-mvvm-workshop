@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Part1C.Views
 {
     /// <summary>
-    /// Interaction logic for EmployeeAltView.xaml
+    /// Interaction logic for EmployeeBoxView.xaml
     /// </summary>
-    public partial class EmployeeAltView : UserControl
+    public partial class EmployeeBoxView : UserControl
     {
-        public EmployeeAltView()
+        public EmployeeBoxView()
         {
             InitializeComponent();
         }

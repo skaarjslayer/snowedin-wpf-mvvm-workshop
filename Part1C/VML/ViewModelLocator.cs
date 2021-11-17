@@ -35,7 +35,20 @@ namespace Part1C.VML
                     return new MockEmployeeViewModel();
                 }
 
-                return new EmployeeListViewModel();
+                return new EmployeeViewModel();
+            }
+        }
+
+        public IContentViewModel ContentViewModel
+        {
+            get
+            {
+                if (IsInDesignMode())
+                {
+                    return new MockContentViewModel();
+                }
+
+                return new ContentViewModel();
             }
         }
 

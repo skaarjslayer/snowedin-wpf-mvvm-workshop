@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\git\snowedin-wpf-mvvm-workshop\Part1C\obj\Debug\
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1C\obj\Debug\
 Part1C
 none
 false
 DEBUG;TRACE
-C:\git\snowedin-wpf-mvvm-workshop\Part1C\App.xaml
-41642251864
+C:\Users\Unrea\Desktop\git\snowedin-wpf-mvvm-workshop\Part1C\App.xaml
+5669167104
 
-22-550284861
-161024008675
-Views\EmployeeAltView.xaml;Views\EmployeeListView.xaml;Views\MainMenuView.xaml;Views\MainWindowView.xaml;
+26-1379210195
+161033527604
+Views\EmployeeBoxView.xaml;Views\EmployeeListView.xaml;Views\ContentView.xaml;Views\MainMenuView.xaml;Views\MainWindowView.xaml;
 
 False
 

@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel>
             <local:MainMenuView></local:MainMenuView>
-            <local:EmployeeListView></local:EmployeeListView>
+            <local:ContentView></local:ContentView>
         </StackPanel>
     </Grid>
 </Window>

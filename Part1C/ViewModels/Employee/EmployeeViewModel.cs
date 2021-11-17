@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Part1C.ViewModels
 {
-    class EmployeeListViewModel : IEmployeeViewModel
+    class EmployeeViewModel : IEmployeeViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,7 +33,7 @@ namespace Part1C.ViewModels
 
         public RelayCommand AddCommand { get; set; }
 
-        public EmployeeListViewModel()
+        public EmployeeViewModel()
         {
             AddCommand = new RelayCommand(OnAddClicked, CanAddBeClicked);
 
@@ -42,7 +42,7 @@ namespace Part1C.ViewModels
             OnFileChanged(ApplicationStateService.Instance.CurrentFile);
         }
 
-        ~EmployeeListViewModel()
+        ~EmployeeViewModel()
         {
             ApplicationStateService.Instance.OnFileChanged -= OnFileChanged;
         }

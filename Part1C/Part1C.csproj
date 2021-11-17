@@ -71,17 +71,23 @@
     <Compile Include="Services\FileService.cs" />
     <Compile Include="Services\SingletonBase.cs" />
     <Compile Include="Services\SerializationService.cs" />
-    <Compile Include="ViewModels\Employee\EmployeeListViewModel.cs" />
+    <Compile Include="ViewModels\Content\ContentViewModel.cs" />
+    <Compile Include="ViewModels\Content\IContentViewModel.cs" />
+    <Compile Include="ViewModels\Content\MockContentViewModel.cs" />
+    <Compile Include="ViewModels\Employee\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\Employee\IEmployeeViewModel.cs" />
     <Compile Include="ViewModels\Employee\MockEmployeeViewModel.cs" />
     <Compile Include="ViewModels\MainMenu\IMainMenuViewModel.cs" />
     <Compile Include="ViewModels\MainMenu\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\MainMenu\MockMainMenuViewModel.cs" />
-    <Compile Include="Views\EmployeeAltView.xaml.cs">
-      <DependentUpon>EmployeeAltView.xaml</DependentUpon>
+    <Compile Include="Views\EmployeeBoxView.xaml.cs">
+      <DependentUpon>EmployeeBoxView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeListView.xaml.cs">
       <DependentUpon>EmployeeListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentView.xaml.cs">
+      <DependentUpon>ContentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
@@ -119,11 +125,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\EmployeeAltView.xaml">
+    <Page Include="Views\EmployeeBoxView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EmployeeListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
