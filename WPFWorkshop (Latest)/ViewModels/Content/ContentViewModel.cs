@@ -1,9 +1,9 @@
-﻿using Part1C.Commands;
-using Part1C.Data;
-using Part1C.Services;
+﻿using WPFWorkshop.Commands;
+using WPFWorkshop.Data;
+using WPFWorkshop.Services;
 using System.ComponentModel;
 
-namespace Part1C.ViewModels
+namespace WPFWorkshop.ViewModels
 {
     class ContentViewModel : IContentViewModel, INotifyPropertyChanged
     {

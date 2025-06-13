@@ -1,8 +1,8 @@
-﻿using Part1C.ViewModels;
+﻿using WPFWorkshop.ViewModels;
 using System.ComponentModel;
 using System.Windows;
 
-namespace Part1C.VML
+namespace WPFWorkshop.VML
 {
     class ViewModelLocator
     {

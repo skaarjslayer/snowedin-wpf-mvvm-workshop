@@ -1,4 +1,4 @@
-﻿using Part1C.ViewModels;
+﻿using WPFWorkshop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Part1C.Views
+namespace WPFWorkshop.Views
 {
     /// <summary>
     /// Interaction logic for MainMenuView.xaml

@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Part1C.Services
+namespace WPFWorkshop.Services
 {
     class NewtonsoftJsonSerializationService : SingletonBase<NewtonsoftJsonSerializationService>
     {

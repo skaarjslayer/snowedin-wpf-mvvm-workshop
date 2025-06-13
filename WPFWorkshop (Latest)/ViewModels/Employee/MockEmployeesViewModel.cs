@@ -1,7 +1,7 @@
-﻿using Part1C.Data;
+﻿using WPFWorkshop.Data;
 using System.Collections.Generic;
 
-namespace Part1C.ViewModels
+namespace WPFWorkshop.ViewModels
 {
     class MockEmployeesViewModel : IEmployeesViewModel
     {

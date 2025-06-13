@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Part1C
+namespace WPFWorkshop
 {
     /// <summary>
     /// Interaction logic for App.xaml

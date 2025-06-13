@@ -1,11 +1,11 @@
 ﻿using Microsoft.Win32;
-using Part1C.Commands;
-using Part1C.Services;
+using WPFWorkshop.Commands;
+using WPFWorkshop.Services;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Part1C.ViewModels
+namespace WPFWorkshop.ViewModels
 {
     class MainMenuViewModel : IMainMenuViewModel
     {

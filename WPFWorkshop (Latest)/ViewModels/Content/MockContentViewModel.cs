@@ -1,7 +1,7 @@
-﻿using Part1C.Commands;
+﻿using WPFWorkshop.Commands;
 using System;
 
-namespace Part1C.ViewModels
+namespace WPFWorkshop.ViewModels
 {
     class MockContentViewModel : IContentViewModel
     {

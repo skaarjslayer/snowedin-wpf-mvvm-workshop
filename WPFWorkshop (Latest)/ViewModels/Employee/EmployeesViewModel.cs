@@ -1,9 +1,9 @@
-﻿using Part1C.Data;
-using Part1C.Services;
+﻿using WPFWorkshop.Data;
+using WPFWorkshop.Services;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Part1C.ViewModels
+namespace WPFWorkshop.ViewModels
 {
     class EmployeesViewModel : IEmployeesViewModel, INotifyPropertyChanged
     {

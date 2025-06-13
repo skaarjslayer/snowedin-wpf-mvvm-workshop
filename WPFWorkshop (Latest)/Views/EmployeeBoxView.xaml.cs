@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Part1C.Views
+namespace WPFWorkshop.Views
 {
     /// <summary>
     /// Interaction logic for EmployeeBoxView.xaml

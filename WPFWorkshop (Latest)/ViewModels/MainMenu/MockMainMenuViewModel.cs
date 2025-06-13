@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Part1C.ViewModels
+namespace WPFWorkshop.ViewModels
 {
     class MockMainMenuViewModel : IMainMenuViewModel
     {

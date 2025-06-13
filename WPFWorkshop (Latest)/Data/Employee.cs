@@ -1,4 +1,4 @@
-﻿namespace Part1C.Data
+﻿namespace WPFWorkshop.Data
 {
     class Employee
     {

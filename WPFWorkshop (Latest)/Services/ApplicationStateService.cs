@@ -1,8 +1,8 @@
-﻿using Part1C.Data;
+﻿using WPFWorkshop.Data;
 using System;
 using System.Collections.Generic;
 
-namespace Part1C.Services
+namespace WPFWorkshop.Services
 {
     class ApplicationStateService : SingletonBase<ApplicationStateService>
     {

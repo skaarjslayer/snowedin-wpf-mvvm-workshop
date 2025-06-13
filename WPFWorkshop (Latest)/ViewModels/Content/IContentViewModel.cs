@@ -1,6 +1,6 @@
-﻿using Part1C.Commands;
+﻿using WPFWorkshop.Commands;
 
-namespace Part1C.ViewModels
+namespace WPFWorkshop.ViewModels
 {
     interface IContentViewModel
     {

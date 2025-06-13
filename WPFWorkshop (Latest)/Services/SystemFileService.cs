@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 
-namespace Part1C.Services
+namespace WPFWorkshop.Services
 {
     class SystemFileService : SingletonBase<SystemFileService>
     {

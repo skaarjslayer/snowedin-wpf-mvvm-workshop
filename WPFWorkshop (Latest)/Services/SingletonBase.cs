@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Part1C.Services
+namespace WPFWorkshop.Services
 {
     abstract class SingletonBase<T>
     {
