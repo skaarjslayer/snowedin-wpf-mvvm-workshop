@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="Part1C.Views.ContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Part1C.Views"
+             xmlns:vm="clr-namespace:Part1C.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding Path=ContentViewModel, Source={StaticResource ViewModelLocator}}">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type vm:EmployeesViewModel}">
+            <ContentControl>
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <!-- Default: Box View -->
+                        <Setter Property="ContentTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <local:EmployeeListView />
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DataContext.CurrentViewMode, 
+                                RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                 Value="List">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <local:EmployeeListView />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding DataContext.CurrentViewMode, 
+                                RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                 Value="Box">
+                                <Setter Property="ContentTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <local:EmployeeBoxView />
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,5,5,5">
+                <Button Content="List" VerticalAlignment="Top" Width="50" Command="{Binding ListCommand}"/>
+                <Button Content="Box" VerticalAlignment="Top" Width="50" Command="{Binding BoxCommand}"/>
+            </StackPanel>
+            <Control DataContext="{Binding Employee}">
+                <Control.Style>
+                    <Style TargetType="Control">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Control">
+                                    <local:EmployeeListView />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding DataContext.CurrentViewMode, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                             Value="List">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Control">
+                                            <local:EmployeeListView />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding DataContext.CurrentViewMode, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                             Value="Box">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Control">
+                                            <local:EmployeeBoxView />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Control.Style>
+            </Control>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10,10,10,10">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Margin" Value="5,0,10,0"/>
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="20,0,0,0"/>
+                        <Setter Property="Width" Value="100"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock>Name:</TextBlock>
+                <TextBox Text="{Binding CurrentName, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock>Department:</TextBlock>
+                <TextBox Text="{Binding CurrentDepartment, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBlock>Title:</TextBlock>
+                <TextBox Text="{Binding CurrentTitle, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <Button Command="{Binding AddCommand}">Add</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
