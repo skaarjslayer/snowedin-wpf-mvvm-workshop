@@ -1,7 +1,7 @@
 ﻿using WPFWorkshop.Commands;
 using WPFWorkshop.Data;
-using WPFWorkshop.Services;
 using System.ComponentModel;
+using WPFWorkshop.Services.Workspace;
 
 namespace WPFWorkshop.ViewModels
 {
@@ -72,7 +72,7 @@ namespace WPFWorkshop.ViewModels
 
         private void OnAddClicked(object parameter)
         {
-            ApplicationStateService.Instance.AddNewEmployee(new Employee(CurrentName, CurrentTitle, CurrentDepartment));
+            WorkspaceService.Instance.AddNewEmployee(new Employee(CurrentName, CurrentTitle, CurrentDepartment));
         }
 
         private bool CanAddBeClicked(object parameter)

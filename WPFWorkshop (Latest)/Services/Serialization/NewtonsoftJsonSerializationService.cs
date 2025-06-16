@@ -1,10 +1,9 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Diagnostics;
 
-namespace WPFWorkshop.Services
+namespace WPFWorkshop.Services.Serialization
 {
-    class NewtonsoftJsonSerializationService : SingletonBase<NewtonsoftJsonSerializationService>
+    class NewtonsoftJsonSerializationService : ISerializationService
     {
         #region Fields
 

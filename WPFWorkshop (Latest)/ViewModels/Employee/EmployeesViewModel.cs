@@ -1,6 +1,5 @@
 ﻿using WPFWorkshop.Data;
 using WPFWorkshop.Services;
-using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace WPFWorkshop.ViewModels
@@ -33,9 +32,9 @@ namespace WPFWorkshop.ViewModels
         public EmployeesViewModel()
         {
             // PROBLEM - not unregistering
-            ApplicationStateService.Instance.OnFileChanged += OnFileChanged;
+          //  ApplicationStateService.Instance.OnFileChanged += OnFileChanged;
 
-            OnFileChanged(ApplicationStateService.Instance.CurrentFile);
+          //  OnFileChanged(ApplicationStateService.Instance.CurrentFile);
         }
 
         #endregion Constructors
@@ -44,7 +43,7 @@ namespace WPFWorkshop.ViewModels
 
         private void OnFileChanged(IReadOnlyCollection<Employee> employees)
         {
-            Employees = ApplicationStateService.Instance.CurrentFile;
+          //  Employees = ApplicationStateService.Instance.CurrentFile;
         }
 
         #endregion Methods

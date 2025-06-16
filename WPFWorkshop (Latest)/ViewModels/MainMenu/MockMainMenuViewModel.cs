@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using WPFWorkshop.Commands;
 
 namespace WPFWorkshop.ViewModels
 {
@@ -7,10 +7,10 @@ namespace WPFWorkshop.ViewModels
     {
         #region Properties
 
-        public ICommand NewCommand => throw new NotImplementedException();
-        public ICommand SaveCommand => throw new NotImplementedException();
-        public ICommand LoadCommand => throw new NotImplementedException();
-        public ICommand ExitCommand => throw new NotImplementedException();
+        public ICommand NewCommand => new RelayCommand((_) => { });
+        public ICommand SaveCommand => new RelayCommand((_) => { });
+        public ICommand LoadCommand => new RelayCommand((_) => { });
+        public ICommand ExitCommand => new RelayCommand((_) => { });
 
         #endregion Properties
     }

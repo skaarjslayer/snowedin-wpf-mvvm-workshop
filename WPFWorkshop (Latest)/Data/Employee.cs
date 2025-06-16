@@ -1,21 +1,21 @@
 ﻿namespace WPFWorkshop.Data
 {
-    class Employee
+    struct Employee
     {
         #region Properties
 
-        public string Name { get; private set; }
-        public string Title { get; private set; }
-        public string Department { get; private set; }
+        public string Name { get; init; }
+        public string Role { get; init; }
+        public string Department { get; init; }
 
         #endregion Properties
 
         #region Constructors
 
-        public Employee(string name, string title, string department)
+        public Employee(string name, string role, string department)
         {
             Name = name;
-            Title = title;
+            Role = role;
             Department = department;
         }
 

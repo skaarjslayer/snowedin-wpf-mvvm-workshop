@@ -1,9 +1,10 @@
 ﻿using Microsoft.Win32;
 using WPFWorkshop.Commands;
-using WPFWorkshop.Services;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using WPFWorkshop.Services.File;
+using WPFWorkshop.Services.Workspace;
 
 namespace WPFWorkshop.ViewModels
 {
@@ -11,17 +12,25 @@ namespace WPFWorkshop.ViewModels
     {
         #region Properties
 
-        public ICommand NewCommand { get; private set; }
-        public ICommand SaveCommand { get; private set; }
-        public ICommand LoadCommand { get; private set; }
-        public ICommand ExitCommand { get; private set; }
+        public ICommand NewCommand { get; init; }
+        public ICommand SaveCommand { get; init; }
+        public ICommand LoadCommand { get; init; }
+        public ICommand ExitCommand { get; init; }
 
         #endregion Properties
 
+        #region Fields
+
+        private IPersistenceService _persistenceService;
+
+        #endregion Fields
+
         #region Constructors
 
-        public MainMenuViewModel()
+        public MainMenuViewModel(IPersistenceService persistenceService)
         {
+            _persistenceService = persistenceService;
+
             NewCommand = new RelayCommand(OnNewClicked);
             SaveCommand = new RelayCommand(OnSaveClicked);
             LoadCommand = new RelayCommand(OnLoadClicked);
@@ -34,7 +43,7 @@ namespace WPFWorkshop.ViewModels
 
         private void OnNewClicked(object parameter)
         {
-            ApplicationStateService.Instance.RequestCreateNewFile();
+            WorkspaceService.Instance.RequestCreateNewFile();
         }
 
         private void OnSaveClicked(object parameter)
@@ -43,7 +52,9 @@ namespace WPFWorkshop.ViewModels
 
             if (saveFileDialog.ShowDialog().Value)
             {
-                ApplicationStateService.Instance.RequestSaveFile(saveFileDialog.FileName);
+                // singletons bad
+                _persistenceService.dowhatever
+               // ApplicationStateService.Instance.RequestSaveFile(saveFileDialog.FileName);
             }
             else
             {
@@ -57,7 +68,7 @@ namespace WPFWorkshop.ViewModels
 
             if (openFileDialog.ShowDialog().Value)
             {
-                ApplicationStateService.Instance.RequestLoadFile(openFileDialog.FileName);
+                WorkspaceService.Instance.RequestLoadFile(openFileDialog.FileName);
             }
             else
             {

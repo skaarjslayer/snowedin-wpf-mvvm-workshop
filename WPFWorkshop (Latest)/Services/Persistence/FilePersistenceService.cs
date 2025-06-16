@@ -1,21 +1,37 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.IO;
+using WPFWorkshop.Services.Serialization;
 
-namespace WPFWorkshop.Services
+namespace WPFWorkshop.Services.File
 {
-    class SystemFileService : SingletonBase<SystemFileService>
+    class FilePersistenceService : IPersistenceService
     {
+        #region Fields
+
+        private ISerializationService _serializationService;
+
+        #endregion Fields
+
+        #region Constructors
+
+        public FilePersistenceService(ISerializationService serializationService)
+        {
+            _serializationService = serializationService;
+        }
+
+        #endregion Constructors
+
         #region Methods
 
-        public bool TrySave(string filepath, string buffer)
+        public bool TrySave(object input, string filepath)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(File.Open(filepath, FileMode.OpenOrCreate)))
+                if()
+                using (StreamWriter writer = new StreamWriter(System.IO.File.Open(filepath, FileMode.OpenOrCreate)))
                 {
                     Debug.WriteLine("Save request complete.");
-                    writer.Write(buffer);
+                    writer.Write(input);
                     return true;
                 }
             }
@@ -30,7 +46,7 @@ namespace WPFWorkshop.Services
         {
             try
             {
-                using (StreamReader reader = new StreamReader(File.Open(filepath, FileMode.Open)))
+                using (StreamReader reader = new StreamReader(System.IO.File.Open(filepath, FileMode.Open)))
                 {
                     Debug.WriteLine("Load request complete.");
                     buffer = reader.ReadToEnd();
