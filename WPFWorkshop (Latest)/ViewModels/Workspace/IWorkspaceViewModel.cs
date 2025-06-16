@@ -2,7 +2,7 @@
 
 namespace WPFWorkshop.ViewModels
 {
-    interface IContentViewModel
+    interface IWorkspaceViewModel
     {
         #region Properties
 
@@ -10,8 +10,8 @@ namespace WPFWorkshop.ViewModels
         RelayCommand BoxCommand { get; }
         RelayCommand AddCommand { get; }
         string CurrentName { get; set;  }
+        string CurrentRole { get; set;  }
         string CurrentDepartment { get; set; }
-        string CurrentTitle { get; set;  }
 
         #endregion Properties
     }

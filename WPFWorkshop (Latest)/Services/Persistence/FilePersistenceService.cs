@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 using WPFWorkshop.Services.Serialization;
 
 namespace WPFWorkshop.Services.File
@@ -23,41 +22,34 @@ namespace WPFWorkshop.Services.File
 
         #region Methods
 
-        public bool TrySave(object input, string filepath)
+        public void Save(object input, string filepath)
         {
             try
             {
-                if()
                 using (StreamWriter writer = new StreamWriter(System.IO.File.Open(filepath, FileMode.OpenOrCreate)))
                 {
-                    Debug.WriteLine("Save request complete.");
-                    writer.Write(input);
-                    return true;
+                    writer.Write(_serializationService.Serialize(input));
                 }
             }
             catch (Exception exception)
             {
-                Debug.WriteLine("Save request failed. Reason: " + exception.Message);
-                return false;
+                throw new Exception("Save request failed. Reason: " + exception.Message);
             }
         }
 
-        public bool TryLoad(string filepath, out string buffer)
+        public object Load(string filepath)
         {
             try
             {
                 using (StreamReader reader = new StreamReader(System.IO.File.Open(filepath, FileMode.Open)))
                 {
-                    Debug.WriteLine("Load request complete.");
-                    buffer = reader.ReadToEnd();
-                    return true;
+                    string buffer = reader.ReadToEnd();
+                    return _serializationService.Deserialize(buffer);
                 }
             }
             catch (Exception exception)
             {
-                Debug.WriteLine("Load request failed. Reason: " + exception.Message);
-                buffer = null;
-                return false;
+                throw new Exception("Load request failed. Reason: " + exception.Message);
             }
         }
 

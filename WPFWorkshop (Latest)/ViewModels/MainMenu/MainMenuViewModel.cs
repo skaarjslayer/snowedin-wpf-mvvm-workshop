@@ -1,9 +1,7 @@
 ﻿using Microsoft.Win32;
-using WPFWorkshop.Commands;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using WPFWorkshop.Services.File;
+using WPFWorkshop.Commands;
 using WPFWorkshop.Services.Workspace;
 
 namespace WPFWorkshop.ViewModels
@@ -21,15 +19,15 @@ namespace WPFWorkshop.ViewModels
 
         #region Fields
 
-        private IPersistenceService _persistenceService;
+        private IWorkspaceService _workspaceService;
 
         #endregion Fields
 
         #region Constructors
 
-        public MainMenuViewModel(IPersistenceService persistenceService)
+        public MainMenuViewModel(IWorkspaceService workspaceService)
         {
-            _persistenceService = persistenceService;
+            _workspaceService = workspaceService;
 
             NewCommand = new RelayCommand(OnNewClicked);
             SaveCommand = new RelayCommand(OnSaveClicked);
@@ -43,7 +41,28 @@ namespace WPFWorkshop.ViewModels
 
         private void OnNewClicked(object parameter)
         {
-            WorkspaceService.Instance.RequestCreateNewFile();
+            void NewFile()
+            {
+                _workspaceService.StartNewFile();
+            }
+
+            if (_workspaceService.IsCurrentFileDirty())
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Current file has unsaved changes. Are you sure you wish to start a new file?",
+                    "Confirmation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    NewFile();
+                }
+            }
+            else
+            {
+                NewFile();
+            }
         }
 
         private void OnSaveClicked(object parameter)
@@ -52,33 +71,65 @@ namespace WPFWorkshop.ViewModels
 
             if (saveFileDialog.ShowDialog().Value)
             {
-                // singletons bad
-                _persistenceService.dowhatever
-               // ApplicationStateService.Instance.RequestSaveFile(saveFileDialog.FileName);
-            }
-            else
-            {
-                Debug.WriteLine("Save was cancelled.");
+                _workspaceService.SaveCurrentFile(saveFileDialog.FileName);
             }
         }
 
         private void OnLoadClicked(object parameter)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            if (openFileDialog.ShowDialog().Value)
+            void LoadFile()
             {
-                WorkspaceService.Instance.RequestLoadFile(openFileDialog.FileName);
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+
+                if (openFileDialog.ShowDialog().Value)
+                {
+                    _workspaceService.LoadFile(openFileDialog.FileName);
+                }
+            }
+
+            if (_workspaceService.IsCurrentFileDirty())
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Current file has unsaved changes. Are you sure you wish to load a new file?",
+                    "Confirmation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    LoadFile();
+                }
             }
             else
             {
-                Debug.WriteLine("Load was cancelled.");
+                LoadFile();
             }
         }
 
         private void OnExitClicked(object parameter)
         {
-            Application.Current.Shutdown();
+            void Shutdown()
+            {
+                Application.Current.Shutdown();
+            }
+
+            if(_workspaceService.IsCurrentFileDirty())
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Current file has unsaved changes. Are you sure you wish to quit?",
+                    "Confirmation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Shutdown();
+                }
+            }
+            else
+            {
+                Shutdown();
+            }
         }
 
         #endregion Methods

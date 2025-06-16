@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System.Windows;
 using WPFWorkshop.Services.File;
 using WPFWorkshop.Services.Serialization;
+using WPFWorkshop.Services.Workspace;
 using WPFWorkshop.ViewModels;
 
 namespace WPFWorkshop
@@ -23,9 +25,16 @@ namespace WPFWorkshop
             base.OnStartup(e);
 
             ServiceCollection services = new();
-            services.AddSingleton<ISerializationService, NewtonsoftJsonSerializationService>();
+            services.AddSingleton<ISerializationService, NewtonsoftJsonSerializationService>((_) => new(new()
+            {
+                Formatting = Formatting.Indented,
+                TypeNameHandling = TypeNameHandling.All,
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full
+            }));
             services.AddSingleton<IPersistenceService, FilePersistenceService>();
+            services.AddSingleton<IWorkspaceService, WorkspaceService>();
             services.AddScoped<IMainMenuViewModel, MainMenuViewModel>();
+            services.AddScoped<IWorkspaceViewModel, WorkspaceViewModel>();
 
             _rootProvider = services.BuildServiceProvider();
         }

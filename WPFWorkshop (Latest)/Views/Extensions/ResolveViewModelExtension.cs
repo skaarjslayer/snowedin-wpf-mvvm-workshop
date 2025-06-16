@@ -2,23 +2,22 @@
 using System.Windows;
 using System.Windows.Markup;
 
-namespace WPFWorkshop.Views.Extensions
+namespace WPFWorkshop.Views
 {
     class ResolveViewModelExtension : MarkupExtension
     {
-        public Type ViewModelType { get; }
+        public Type ViewModelType { get; set; }
 
-        public ResolveViewModelExtension(Type viewModelType)
-        {
-            ViewModelType = viewModelType;
-        }
+        public ResolveViewModelExtension() { }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            IProvideValueTarget target = (IProvideValueTarget)serviceProvider.GetService(typeof(IProvideValueTarget));
+            if (serviceProvider == null)
+                return this;  // ≡ defer instantiation to runtime context
 
+            IProvideValueTarget target = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
             if (target?.TargetObject is not FrameworkElement frameworkElement)
-                return null;
+                return this;
 
             IServiceScope scope = App.RootProvider.CreateScope();
             object viewModel = scope.ServiceProvider.GetRequiredService(ViewModelType);

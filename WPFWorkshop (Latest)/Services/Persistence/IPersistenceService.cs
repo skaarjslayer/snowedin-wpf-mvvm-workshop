@@ -2,7 +2,7 @@
 {
     interface IPersistenceService
     {
-        bool TrySave(string filepath, string buffer);
-        bool TryLoad(string filepath, out string buffer);
+        void Save(object input, string filepath);
+        object Load(string filepath);
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System.Diagnostics;
 
 namespace WPFWorkshop.Services.Serialization
 {
@@ -7,50 +6,42 @@ namespace WPFWorkshop.Services.Serialization
     {
         #region Fields
 
-        private JsonSerializerSettings _serializerSettings = new JsonSerializerSettings()
-        {
-            Formatting = Formatting.Indented,
-            TypeNameHandling = TypeNameHandling.All,
-            TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full
-        };
+        private JsonSerializerSettings _serializerSettings;
 
         #endregion Fields
 
+        #region Constructors
+
+        public NewtonsoftJsonSerializationService(JsonSerializerSettings serializerSettings)
+        {
+            _serializerSettings = serializerSettings;
+        }
+
+        #endregion Constructors
+
         #region Methods
 
-        public bool TrySerialize(object input, out string output)
+        public string Serialize(object input)
         {
-            Debug.WriteLine("Attempting to serialize C# object of type: " + input.GetType());
-
             try
             {
-                Debug.WriteLine("Serialization succeeded.");
-                output = JsonConvert.SerializeObject(input, _serializerSettings);
-                return true;
+                return JsonConvert.SerializeObject(input, _serializerSettings);
             }
             catch (Exception exception)
             {
-                Debug.WriteLine("Serialization failed. Reason: " + exception);
-                output = null;
-                return false;
+                throw new Exception("Serialization failed. Reason: " + exception);
             }
         }
 
-        public bool TryDeserialize(string input, out object output)
+        public object Deserialize(string input)
         {
-            Debug.WriteLine("Attempting to deserialize JSON object: " + input);
-
             try
             {
-                Debug.WriteLine("Deserialization succeeded.");
-                output = JsonConvert.DeserializeObject(input, _serializerSettings);
-                return true;
+                return JsonConvert.DeserializeObject(input, _serializerSettings);
             }
             catch (Exception exception)
             {
-                Debug.WriteLine("Deserialization failed. Reason: " + exception);
-                output = null;
-                return false;
+                throw new Exception("Deserialization failed. Reason: " + exception);
             }
         }
 

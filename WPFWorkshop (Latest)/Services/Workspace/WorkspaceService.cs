@@ -1,23 +1,29 @@
 ﻿using WPFWorkshop.Data;
-using WPFWorkshop.Services.Serialization;
 using WPFWorkshop.Services.File;
 
 namespace WPFWorkshop.Services.Workspace
 {
-    class WorkspaceService : IWorkspaceService
+    class WorkspaceService : IWorkspaceService, IDisposable
     {
         #region Events
 
-        public event Action<IReadOnlyList<Employee>> OnFileChanged = null;
+        public Action Changed;
 
         #endregion Events
 
         #region Properties
 
-        private IPersistenceService _persistenceService;
-        private List<Employee> employees = new List<Employee>();
+        public ref WorkspaceFile CurrentFile => ref _currentFile;
 
-        #endregion Propertiesa
+        #endregion Properties
+
+        #region Fields
+
+        private IPersistenceService _persistenceService;
+        private WorkspaceFile _savedFile = new();
+        private WorkspaceFile _currentFile = new();
+
+        #endregion Fields
 
         #region Constructors
 
@@ -30,42 +36,52 @@ namespace WPFWorkshop.Services.Workspace
 
         #region Methods
 
-        public void RequestCreateNewFile()
+        public void Dispose()
         {
-            employees = new List<Employee>();
-
-            OnFileChanged?.Invoke(employees);
+            _currentFile.Changed -= OnFileChanged;
         }
 
-        public void RequestLoadFile(string filepath)
+        public void StartNewFile()
         {
-            if (FilePersistenceService.Instance.TryLoad(filepath, out string buffer))
-            {
-                if (NewtonsoftJsonSerializationService.Instance.TryDeserialize(buffer, out object employees))
-                {
-                    this.employees = (List<Employee>)employees;
+            _savedFile = new WorkspaceFile();
 
-                    OnFileChanged?.Invoke(this.employees);
-                }
-            }
+            SetCurrentFile(new WorkspaceFile(_savedFile));
+
+            Changed?.Invoke();
         }
 
-        public void RequestSaveFile(string filepath)
+        public void LoadFile(string filepath)
         {
-            _persistenceService.TrySave(filepath, string buffer);
+            _savedFile = (WorkspaceFile)_persistenceService.Load(filepath);
 
+            SetCurrentFile(new WorkspaceFile(_savedFile));
 
-            if (NewtonsoftJsonSerializationService.Instance.TrySerialize(employees, out string buffer))
-            {
-                FilePersistenceService.Instance.TrySave(filepath, buffer);
-            }
+            Changed?.Invoke();
         }
 
-        public void AddNewEmployee(Employee employee)
+        public void SaveCurrentFile(string filepath)
         {
-            employees.Add(employee);
+            _persistenceService.Save(_currentFile, filepath);
+            _savedFile = new WorkspaceFile(_currentFile);
 
-            OnFileChanged?.Invoke(employees);
+            Changed?.Invoke();
+        }
+
+        public bool IsCurrentFileDirty()
+        {
+            return !_savedFile.Equals(_currentFile);
+        }
+
+        private void SetCurrentFile(WorkspaceFile file)
+        {
+            _currentFile.Changed -= OnFileChanged;
+            _currentFile = file;
+            _currentFile.Changed += OnFileChanged;
+        }
+
+        private void OnFileChanged()
+        {
+            Changed?.Invoke();
         }
 
         #endregion Methods
