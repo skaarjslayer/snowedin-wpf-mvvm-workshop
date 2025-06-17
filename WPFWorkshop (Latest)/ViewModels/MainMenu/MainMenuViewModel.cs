@@ -1,9 +1,8 @@
 ﻿using Microsoft.Win32;
-using WPFWorkshop.Commands;
-using WPFWorkshop.Services;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using WPFWorkshop.Commands;
+using WPFWorkshop.Services.Workspace;
 
 namespace WPFWorkshop.ViewModels
 {
@@ -11,17 +10,25 @@ namespace WPFWorkshop.ViewModels
     {
         #region Properties
 
-        public ICommand NewCommand { get; private set; }
-        public ICommand SaveCommand { get; private set; }
-        public ICommand LoadCommand { get; private set; }
-        public ICommand ExitCommand { get; private set; }
+        public ICommand NewCommand { get; init; }
+        public ICommand SaveCommand { get; init; }
+        public ICommand LoadCommand { get; init; }
+        public ICommand ExitCommand { get; init; }
 
         #endregion Properties
 
+        #region Fields
+
+        private IWorkspaceService _workspaceService;
+
+        #endregion Fields
+
         #region Constructors
 
-        public MainMenuViewModel()
+        public MainMenuViewModel(IWorkspaceService workspaceService)
         {
+            _workspaceService = workspaceService;
+
             NewCommand = new RelayCommand(OnNewClicked);
             SaveCommand = new RelayCommand(OnSaveClicked);
             LoadCommand = new RelayCommand(OnLoadClicked);
@@ -34,7 +41,28 @@ namespace WPFWorkshop.ViewModels
 
         private void OnNewClicked(object parameter)
         {
-            ApplicationStateService.Instance.RequestCreateNewFile();
+            void NewFile()
+            {
+                _workspaceService.StartNewFile();
+            }
+
+            if (_workspaceService.IsCurrentFileDirty())
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Current file has unsaved changes. Are you sure you wish to start a new file?",
+                    "Confirmation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    NewFile();
+                }
+            }
+            else
+            {
+                NewFile();
+            }
         }
 
         private void OnSaveClicked(object parameter)
@@ -43,31 +71,65 @@ namespace WPFWorkshop.ViewModels
 
             if (saveFileDialog.ShowDialog().Value)
             {
-                ApplicationStateService.Instance.RequestSaveFile(saveFileDialog.FileName);
-            }
-            else
-            {
-                Debug.WriteLine("Save was cancelled.");
+                _workspaceService.SaveCurrentFile(saveFileDialog.FileName);
             }
         }
 
         private void OnLoadClicked(object parameter)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            if (openFileDialog.ShowDialog().Value)
+            void LoadFile()
             {
-                ApplicationStateService.Instance.RequestLoadFile(openFileDialog.FileName);
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+
+                if (openFileDialog.ShowDialog().Value)
+                {
+                    _workspaceService.LoadFile(openFileDialog.FileName);
+                }
+            }
+
+            if (_workspaceService.IsCurrentFileDirty())
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Current file has unsaved changes. Are you sure you wish to load a new file?",
+                    "Confirmation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    LoadFile();
+                }
             }
             else
             {
-                Debug.WriteLine("Load was cancelled.");
+                LoadFile();
             }
         }
 
         private void OnExitClicked(object parameter)
         {
-            Application.Current.Shutdown();
+            void Shutdown()
+            {
+                Application.Current.Shutdown();
+            }
+
+            if(_workspaceService.IsCurrentFileDirty())
+            {
+                MessageBoxResult result = MessageBox.Show(
+                    "Current file has unsaved changes. Are you sure you wish to quit?",
+                    "Confirmation",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Shutdown();
+                }
+            }
+            else
+            {
+                Shutdown();
+            }
         }
 
         #endregion Methods

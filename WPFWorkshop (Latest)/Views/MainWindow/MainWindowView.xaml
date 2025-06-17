@@ -8,8 +8,8 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <StackPanel>
-            <local:MainMenuView></local:MainMenuView>
-            <local:ContentView></local:ContentView>
+            <local:MainMenuView/>
+            <local:WorkspaceView/>
         </StackPanel>
     </Grid>
 </Window>

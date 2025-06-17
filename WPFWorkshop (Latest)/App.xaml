@@ -2,9 +2,5 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:WPFWorkshop"
-             xmlns:vml="clr-namespace:WPFWorkshop.VML"
-             StartupUri="Views\MainWindowView.xaml">
-    <Application.Resources>
-        <vml:ViewModelLocator x:Key="ViewModelLocator" />
-    </Application.Resources>
+             StartupUri="Views\MainWindow\MainWindowView.xaml">
 </Application>
