@@ -19,7 +19,7 @@ namespace WPFWorkshop.ViewModels
 
         public MockWorkspaceViewModel()
         {
-            CurrentName = CurrentRole = CurrentDepartment = "ExampleTextInput";
+            CurrentName = CurrentRole = CurrentDepartment = "ExampleInput";
         }
 
         #endregion Constructors

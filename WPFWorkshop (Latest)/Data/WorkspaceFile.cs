@@ -11,7 +11,7 @@ namespace WPFWorkshop.Data
         {
             #region Methods
 
-            public bool Equals(WorkspaceFile? x, WorkspaceFile? y)
+            public bool Equals(WorkspaceFile x, WorkspaceFile y)
             {
                 return x._employees.SequenceEqual(y._employees);
             }

@@ -16,7 +16,7 @@
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ListView x:Name="ParentPanel" Background="Aqua" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <ListView x:Name="ParentPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
