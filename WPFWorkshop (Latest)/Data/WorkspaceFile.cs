@@ -1,20 +1,52 @@
-﻿namespace WPFWorkshop.Data
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
+
+namespace WPFWorkshop.Data
 {
-    struct WorkspaceFile
+    class WorkspaceFile
     {
-        #region Events
+        #region Classes
 
-        public Action Changed;
+        private class EqualityComparer : IEqualityComparer<WorkspaceFile>
+        {
+            #region Methods
 
-        #endregion Events
+            public bool Equals(WorkspaceFile? x, WorkspaceFile? y)
+            {
+                return x._employees.SequenceEqual(y._employees);
+            }
 
-        private List<Employee> _employees;
+            public int GetHashCode([DisallowNull] WorkspaceFile obj)
+            {
+                int hash = 17;
+
+                foreach (Employee employee in obj.Employees)
+                {
+                    hash = hash * 31 + employee.GetHashCode();
+                }
+
+                return hash;
+            }
+
+            #endregion Methods
+        }
+
+        #endregion Classes
+
+        #region Properties
+
+        public static IEqualityComparer<WorkspaceFile> Comparer { get; } = new EqualityComparer();
+
+        private ObservableCollection<Employee> _employees = new();
+        public ICollection<Employee> Employees => _employees;
+
+        #endregion Properties
 
         #region Constructors
 
         public WorkspaceFile()
         {
-            _employees = new();
+
         }
 
         public WorkspaceFile(WorkspaceFile otherFile)
@@ -26,33 +58,9 @@
 
         #region Methods
 
-        public override bool Equals(object obj)
-        {
-            if (obj is WorkspaceFile other)
-            {
-                return _employees.SequenceEqual(other._employees);
-            }
-
-            return false;
-        }
-
-        public override int GetHashCode()
-        {
-            int hash = 17;
-
-            foreach (Employee employee in _employees)
-            {
-                hash = hash * 31 + employee.GetHashCode();
-            }
-
-            return hash;
-        }
-
         public void AddEmployee(Employee employee)
         {
             _employees.Add(employee);
-
-            Changed?.Invoke();
         }
 
         #endregion Methods

@@ -6,13 +6,22 @@ namespace WPFWorkshop.ViewModels
     {
         #region Properties
 
-        RelayCommand IWorkspaceViewModel.ListCommand => new RelayCommand((_) => { });
-        RelayCommand IWorkspaceViewModel.BoxCommand => new RelayCommand((_) => { });
-        RelayCommand IWorkspaceViewModel.AddCommand => new RelayCommand((_) => { });
-        string IWorkspaceViewModel.CurrentName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        string IWorkspaceViewModel.CurrentRole { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        string IWorkspaceViewModel.CurrentDepartment { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public RelayCommand ListCommand => new RelayCommand((_) => { });
+        public RelayCommand BoxCommand => new RelayCommand((_) => { });
+        public RelayCommand AddCommand => new RelayCommand((_) => { });
+        public string CurrentName { get; set; }
+        public string CurrentRole { get; set; }
+        public string CurrentDepartment { get; set; }
 
         #endregion Properties
+
+        #region Constructors
+
+        public MockWorkspaceViewModel()
+        {
+            CurrentName = CurrentRole = CurrentDepartment = "ExampleTextInput";
+        }
+
+        #endregion Constructors
     }
 }

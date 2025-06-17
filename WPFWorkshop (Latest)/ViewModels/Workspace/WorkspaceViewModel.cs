@@ -5,7 +5,7 @@ using WPFWorkshop.Services.Workspace;
 
 namespace WPFWorkshop.ViewModels
 {
-    class WorkspaceViewModel : IWorkspaceViewModel, INotifyPropertyChanged
+    class WorkspaceViewModel : IDisposable, IWorkspaceViewModel, INotifyPropertyChanged
     {
         #region Enums
 
@@ -58,6 +58,7 @@ namespace WPFWorkshop.ViewModels
         public WorkspaceViewModel(IWorkspaceService workspaceService)
         {
             _workspaceService = workspaceService;
+            _workspaceService.CurrentFileChanged += OnCurrentFileChanged;
 
             ListCommand = new RelayCommand(OnListClicked);
             BoxCommand = new RelayCommand(OnBoxClicked);
@@ -67,6 +68,16 @@ namespace WPFWorkshop.ViewModels
         #endregion Constructors
 
         #region Methods
+
+        public void Dispose()
+        {
+            _workspaceService.CurrentFileChanged -= OnCurrentFileChanged;
+        }
+
+        private void OnCurrentFileChanged()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(WorkspaceFile)));
+        }
 
         private void OnListClicked(object parameter)
         {

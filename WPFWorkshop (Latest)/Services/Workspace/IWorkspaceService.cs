@@ -4,9 +4,15 @@ namespace WPFWorkshop.Services.Workspace
 {
     interface IWorkspaceService
     {
+        #region Events
+
+        event Action CurrentFileChanged;
+
+        #endregion Events
+
         #region Properties
 
-        ref WorkspaceFile CurrentFile { get; }
+        WorkspaceFile CurrentFile { get; }
 
         #endregion Properties
 

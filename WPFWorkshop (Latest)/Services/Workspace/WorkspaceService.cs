@@ -3,25 +3,25 @@ using WPFWorkshop.Services.File;
 
 namespace WPFWorkshop.Services.Workspace
 {
-    class WorkspaceService : IWorkspaceService, IDisposable
+    class WorkspaceService : IWorkspaceService
     {
         #region Events
 
-        public Action Changed;
+        public event Action CurrentFileChanged;
 
         #endregion Events
 
         #region Properties
 
-        public ref WorkspaceFile CurrentFile => ref _currentFile;
+        public WorkspaceFile CurrentFile => _currentFile;
 
         #endregion Properties
 
         #region Fields
 
         private IPersistenceService _persistenceService;
-        private WorkspaceFile _savedFile = new();
-        private WorkspaceFile _currentFile = new();
+        private WorkspaceFile _savedFile;
+        private WorkspaceFile _currentFile;
 
         #endregion Fields
 
@@ -30,58 +30,37 @@ namespace WPFWorkshop.Services.Workspace
         public WorkspaceService(IPersistenceService persistenceService)
         {
             _persistenceService = persistenceService;
+            _savedFile = new();
+            _currentFile = new();
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public void Dispose()
-        {
-            _currentFile.Changed -= OnFileChanged;
-        }
-
         public void StartNewFile()
         {
             _savedFile = new WorkspaceFile();
-
-            SetCurrentFile(new WorkspaceFile(_savedFile));
-
-            Changed?.Invoke();
+            _currentFile = new WorkspaceFile();
+            CurrentFileChanged?.Invoke();
         }
 
         public void LoadFile(string filepath)
         {
             _savedFile = (WorkspaceFile)_persistenceService.Load(filepath);
-
-            SetCurrentFile(new WorkspaceFile(_savedFile));
-
-            Changed?.Invoke();
+            _currentFile = new WorkspaceFile(_savedFile);
+            CurrentFileChanged?.Invoke();
         }
 
         public void SaveCurrentFile(string filepath)
         {
             _persistenceService.Save(_currentFile, filepath);
             _savedFile = new WorkspaceFile(_currentFile);
-
-            Changed?.Invoke();
         }
 
         public bool IsCurrentFileDirty()
         {
-            return !_savedFile.Equals(_currentFile);
-        }
-
-        private void SetCurrentFile(WorkspaceFile file)
-        {
-            _currentFile.Changed -= OnFileChanged;
-            _currentFile = file;
-            _currentFile.Changed += OnFileChanged;
-        }
-
-        private void OnFileChanged()
-        {
-            Changed?.Invoke();
+            return !WorkspaceFile.Comparer.Equals(_savedFile, _currentFile);
         }
 
         #endregion Methods

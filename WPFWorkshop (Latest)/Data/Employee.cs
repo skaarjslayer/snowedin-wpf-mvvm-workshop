@@ -1,6 +1,6 @@
 ﻿namespace WPFWorkshop.Data
 {
-    struct Employee
+    class Employee
     {
         #region Properties
 
