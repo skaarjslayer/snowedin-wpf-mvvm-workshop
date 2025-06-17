@@ -7,12 +7,6 @@ namespace WPFWorkshop.ViewModels
 {
     class WorkspaceViewModel : IDisposable, IWorkspaceViewModel, INotifyPropertyChanged
     {
-        #region Enums
-
-        public enum ViewMode { List, Box }
-
-        #endregion Enumms
-
         #region Events
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -23,8 +17,8 @@ namespace WPFWorkshop.ViewModels
 
         public WorkspaceFile WorkspaceFile => _workspaceService.CurrentFile;
 
-        private ViewMode _viewMode;
-        public ViewMode CurrentViewMode
+        private IWorkspaceViewModel.ViewMode _viewMode;
+        public IWorkspaceViewModel.ViewMode CurrentViewMode
         {
             get => _viewMode;
             set { _viewMode = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CurrentViewMode))); }
@@ -81,12 +75,12 @@ namespace WPFWorkshop.ViewModels
 
         private void OnListClicked(object parameter)
         {
-            CurrentViewMode = ViewMode.List;
+            CurrentViewMode = IWorkspaceViewModel.ViewMode.List;
         }
 
         private void OnBoxClicked(object parameter)
         {
-            CurrentViewMode = ViewMode.Box;
+            CurrentViewMode = IWorkspaceViewModel.ViewMode.Box;
         }
 
         private void OnAddClicked(object parameter)

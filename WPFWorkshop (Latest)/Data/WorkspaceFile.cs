@@ -37,7 +37,7 @@ namespace WPFWorkshop.Data
 
         public static IEqualityComparer<WorkspaceFile> Comparer { get; } = new EqualityComparer();
 
-        private ObservableCollection<Employee> _employees = new();
+        private ObservableCollection<Employee> _employees;
         public ICollection<Employee> Employees => _employees;
 
         #endregion Properties
@@ -46,7 +46,12 @@ namespace WPFWorkshop.Data
 
         public WorkspaceFile()
         {
+            _employees = new();
+        }
 
+        public WorkspaceFile(IEnumerable<Employee> employees)
+        {
+            _employees = new(employees);
         }
 
         public WorkspaceFile(WorkspaceFile otherFile)
